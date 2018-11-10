@@ -18,17 +18,17 @@ public class Post extends BaseAdapter {
 
     public Post(Context contexto, List<Aluno> lista) {
         this.contexto = contexto;
-        this.lista = lista;
+        this.trazerlista = trazerlista;
     }
 
     @Override
     public int getCount() {
-        return lista.size();
+        return trazerlista.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return lista.get(position);
+        return trazerlista.get(position);
     }
 
     @Override
@@ -36,25 +36,31 @@ public class Post extends BaseAdapter {
         return position;
     }
 
+    /* view da imagem layout das notas */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View linha = LayoutInflater.from(contexto).inflate(R.layout.aluno, null);
+        View linha = LayoutInflater.from(contexto).inflate(R.layout.layout_nota);
         Aluno aluno = trazerlista.get(position);
 
+        /*apontado para as ids dos campos construindos*/
         TextView nome = (TextView) linha.findViewById(R.id.textViewNome;
         TextView nota = (TextView) linha.findViewById(R.id.textViewNota);
         ImageView imagem = (ImageView) linha.findViewById(R.id.imageView);
 
+        /*setanto os dois campos para retornar dados*/
         nome.setText(aluno.getnome());
         nota.setText(aluno.getNota() + "");
 
-        if(aluno.getNota() < 6){
-            imagem.setImageResource(R.drawable.vermelha);
-        }
-        else {
+        /*regra para imagem aparecer azul ou vermelho*/
+        if(aluno.getNota() > 6){
             imagem.setImageResource(R.drawable.azul);
         }
-
+        else {
+            imagem.setImageResource(R.drawable.vermelho);
+        }
         return linha;
     }
 }
+
+
+

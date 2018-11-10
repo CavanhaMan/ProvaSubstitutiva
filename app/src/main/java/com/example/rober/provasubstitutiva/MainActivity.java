@@ -39,11 +39,11 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
         return (new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .build()).create(Chamadas.class);
+                .build()).create(Chamadas.Ch.class);
     }
 
     private void chamada() {
-        Call<List<>> call = getRetrofit().trazerLista();
+        Call<List<Aluno>> call = getRetrofit().buscarLista();
         call.enqueue(new Callback<List<Post>>() {//chamada assíncrona
             public void onResponse(Call<List<Post>> call,
                                    Response<List<Post>> response) {
